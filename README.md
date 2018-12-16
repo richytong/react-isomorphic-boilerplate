@@ -5,14 +5,11 @@ Notes:
   - Node v10.14.1 at the time of writing
 
 ## Getting started
-Clone the repo with
-```git clone git@github.com:richytong/react-isomorphic-boilerplate```
+Clone the repo `git clone git@github.com:richytong/react-isomorphic-boilerplate`
 
 Install dependencies `npm i`
 
-Build the source and bundle `make build`
-
-Run the server `node dist/server.js`
+Run the application `npm start`
 
 Navigate to `http://localhost:3000`
 
@@ -35,7 +32,7 @@ make
   - `push` auths and pushes to remote docker repository
 
 ## Notes
-```redux``` is a predicatable state container for Javascript apps. Predictable in its declarative approach to state management using ```Actions```, plain Javascript object payloads that send data to the application ```store``` - (```store.dispatch(action)```), and ```Reducers``` that take these ```Actions``` and specify how the application's state changes in response ```(previousState, action) => newState```. Reducers often switch on ```action.type``` to predictably and declaratively change the application state like so:
+`redux` is a predicatable state container for Javascript apps. Predictable in its declarative approach to state management using `Actions`, plain Javascript object payloads that send data to the application `store` with `store.dispatch(action)`, and `Reducers` that take these `Actions` and specify how the application's state changes in response `(previousState, action) => newState`. Reducers often switch on `action.type` to predictably and declaratively change the application state like so:
 ```Javascript
 const myReducer = (previousState = [], action) => { // our application state is an array
   switch (action.type) {
