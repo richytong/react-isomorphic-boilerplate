@@ -17,11 +17,21 @@ Run the server `node dist/server.js`
 Navigate to `http://localhost:3000`
 
 ## Deployment
+Export environmental variables needed for build in `.build.env` (you edit this)
+```bash
+. .build.env
+```
+
+Run make
+```bash
+make
+```
+
+<b>Makefile</b>
 `make`
   - `clean` removes old build files
-  - `build` builds source and bundle
-  - `docker-build` builds docker iamge
-  - `docker-login` auths remote docker repository
+  - `build-source` builds source and bundle
+  - `build-image` builds docker iamge
   - `push` auths and pushes to remote docker repository
 
 ## Notes

@@ -5,20 +5,22 @@ build-and-push:
 	push
 
 clean:
-	rm -rf ./build/* ./dist
+	rm -rf ./build ./dist
 
-build:
-	npm run build-source
-	npm run build-bundle
+build-source:
+	./node_modules/\@babel/cli/bin/babel.js ./src --out-dir ./dist
+	mkdir -p build
+	NODE_ENV=production ./node_modules/webpack-cli/bin/cli.js \
+		--progress \
+		--mode production \
+		--devtool source-map \
+		--output ./build/app.bundle.js
 
-push:
-	docker-login
-	docker push 520576626369.dkr.ecr.us-west-2.amazonaws.com/viewcharm-website:0.1.9
-
-docker-build:
+build-image:
 	docker build . \
-	  --tag 520576626369.dkr.ecr.us-west-2.amazonaws.com/viewcharm-website:0.1.9 \
+	  --tag ${DOCKER_REGISTRY_URL}:${DOCKER_IMAGE_NAME}:${VERSION} \
 	  --file './Dockerfile'	
 
-docker-login:
+push:
 	eval "$(aws ecr get-login --no-include-email --region us-west-2)"
+	docker push ${DOCKER_REGISTRY_URL}:${DOCKER_IMAGE_NAME}:${VERSION}
