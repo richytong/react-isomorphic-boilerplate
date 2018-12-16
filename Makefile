@@ -17,10 +17,12 @@ build-source:
 		--output ./build/app.bundle.js
 
 build-image:
+	VERSION=$(git describe --tags $(git rev-list --tags --max-count=1))
 	docker build . \
 	  --tag ${DOCKER_REGISTRY_URL}:${DOCKER_IMAGE_NAME}:${VERSION} \
 	  --file './Dockerfile'	
 
 push:
+	VERSION=$(git describe --tags $(git rev-list --tags --max-count=1))
 	eval "$(aws ecr get-login --no-include-email --region us-west-2)"
-	docker push ${DOCKER_REGISTRY_URL}:${DOCKER_IMAGE_NAME}:${VERSION}
+	docker push ${DOCKER_REGISTRY_URL}:${DOCKER_IMAGE_NAME}:${VERSION
