@@ -2,11 +2,7 @@ DOCKER_REGISTRY_URL := YOUR_DOCKER_REGISTRY_URL
 DOCKER_IMAGE_NAME := YOUR_DOCKER_IMAGE_NAME
 VERSION := $(shell cat package.json | jq -r '.version')
 
-build-and-push:
-	clean
-	build
-	docker-build
-	push
+build-and-push: clean build-source build-image push
 
 clean:
 	rm -rf ./build ./dist
@@ -22,9 +18,9 @@ build-source:
 
 build-image:
 	docker build . \
-	  --tag $(DOCKER_REGISTRY_URL)/$(DOCKER_IMAGE_NAME):$(VERSION) \
-	  --file './Dockerfile'	
+		--tag $(DOCKER_REGISTRY_URL)/$(DOCKER_IMAGE_NAME):$(VERSION) \
+		--file './Dockerfile'
 
 push:
-	eval "$(aws ecr get-login --no-include-email --region us-west-2)"
+	eval $(shell aws ecr get-login --no-include-email --profile YOUR_PROFILE_NAME)
 	docker push $(DOCKER_REGISTRY_URL)/$(DOCKER_IMAGE_NAME):$(VERSION)
