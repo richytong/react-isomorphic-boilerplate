@@ -4,7 +4,7 @@ import Helmet from 'react-helmet'
 import { connect } from 'react-redux'
 import Waypoint from 'react-waypoint'
 import PropTypes from 'prop-types'
-import { fetchAnimeData } from '../store'
+import { fetchAnimeData } from '../actions'
 
 class TopAnime extends React.Component {
   componentDidMount() {

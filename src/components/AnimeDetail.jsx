@@ -2,7 +2,7 @@ import React from 'react'
 import Helmet from 'react-helmet'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { fetchAnimeDetailData, resetAnimeDetailData } from '../store'
+import { fetchAnimeDetailData, resetAnimeDetailData } from '../actions'
 import NotFound from './NotFound'
 
 class AnimeDetail extends React.Component {
