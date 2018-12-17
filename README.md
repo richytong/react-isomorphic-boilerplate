@@ -3,6 +3,7 @@ Whole bunch of config for an isomorphic React application
 
 Notes:
   - Node v10.14.1 at the time of writing
+  - `make build-image` and `make push` both use `jq`, a json parser which must be installed with `brew install jq`
 
 ## Getting started
 Clone the repo `git clone git@github.com:richytong/react-isomorphic-boilerplate`
@@ -14,17 +15,16 @@ Run the application `npm start`
 Navigate to `http://localhost:3000`
 
 ## Deployment
-Export environmental variables needed for build in `.build.env` (you edit this)
-```bash
-. .build.env
-```
-
 Run make
 ```bash
 make
 ```
 
 <b>Makefile</b>
+`DOCKER_REGISTRY_URL` - url to your docker registry, for example 211133300000.dkr.ecr.us-east-1.amazonaws.com
+`DOCKER_IMAGE_NAME` - name of the docker image, usually the module name
+`VERSION` - pulled directly from `package.json`.version
+
 `make`
   - `clean` removes old build files
   - `build-source` builds source and bundle
