@@ -1,20 +1,21 @@
-DOCKER_REGISTRY_URL := YOUR_DOCKER_REGISTRY_URL
-DOCKER_IMAGE_NAME := YOUR_DOCKER_IMAGE_NAME
+SHELL=/bin/bash
+DOCKER_REGISTRY_URL := 292833313474.dkr.ecr.us-east-1.amazonaws.com
+DOCKER_IMAGE_NAME := dandy-admin
 VERSION := $(shell cat package.json | jq -r '.version')
 
-build-and-push: clean build-source build-image push
+build-and-push: clean build-source build-bundle build-image push
+
+build: clean build-source build-bundle
 
 clean:
 	rm -rf ./build ./dist
 
 build-source:
 	./node_modules/\@babel/cli/bin/babel.js ./src --out-dir ./dist
+
+build-bundle:
 	mkdir -p build
-	NODE_ENV=production ./node_modules/webpack-cli/bin/cli.js \
-		--progress \
-		--mode production \
-		--devtool source-map \
-		--output ./build/app.bundle.js
+	./node_modules/webpack-cli/bin/cli.js --mode production --devtool source-map
 
 build-image:
 	docker build . \
@@ -22,5 +23,5 @@ build-image:
 		--file './Dockerfile'
 
 push:
-	eval $(shell aws ecr get-login --no-include-email --profile YOUR_PROFILE_NAME)
+	eval $(shell aws ecr get-login --no-include-email --profile dandy)
 	docker push $(DOCKER_REGISTRY_URL)/$(DOCKER_IMAGE_NAME):$(VERSION)

@@ -5,14 +5,9 @@
   "author": "Richard Tong",
   "license": "UNLICENSED",
   "main": "webpack.config.js",
-  "scripts": {
-    "client": "webpack --watch --progress --mode development -o build/app.bundle.js",
-    "server": "nodemon ./src/server.jsx --exec babel-node",
-    "start": "npm-run-all --parallel server client"
-  },
   "repository": {
     "type": "git",
-    "url": "github:richytong/react-isomorphic-boilerplate"
+    "url": "github:dandylive/dandy-admin"
   },
   "dependencies": {
     "aphrodite": "^2.2.2",
@@ -33,16 +28,16 @@
   "devDependencies": {
     "@babel/cli": "^7.2.0",
     "@babel/core": "^7.2.2",
-    "@babel/node": "^7.2.2",
     "@babel/plugin-transform-runtime": "^7.2.0",
     "@babel/preset-env": "^7.2.0",
     "@babel/preset-react": "^7.0.0",
+    "@babel/register": "^7.0.0",
     "@babel/runtime": "^7.2.0",
     "babel-loader": "^8.0.4",
+    "chokidar": "^2.0.4",
     "compression-webpack-plugin": "^2.0.0",
     "friendly-errors-webpack-plugin": "^1.6.1",
-    "nodemon": "^1.18.9",
-    "npm-run-all": "^4.1.5",
+    "minimist": "^1.2.0",
     "webpack": "^4.15.0",
     "webpack-bundle-analyzer": "^3.0.1",
     "webpack-cli": "^3.1.0"

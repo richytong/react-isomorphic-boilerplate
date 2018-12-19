@@ -1,7 +1,9 @@
 import request from 'superagent'
 
+const { JIKAN_API_URL } = process.env
+
 export const fetchTopAnime = async (page) => {
-  const res = await request.get(`https://api.jikan.moe/top/anime/${page}`)
+  const res = await request.get(`${JIKAN_API_URL}/top/anime/${page}`)
   return res.body.top.map(({ rank, title, mal_id, image_url }) => ({
     rank,
     title,
@@ -11,7 +13,7 @@ export const fetchTopAnime = async (page) => {
 }
 
 export const fetchAnimeDetail = async (malId) => {
-  const res = await request.get(`https://api.jikan.moe/anime/${malId}`)
+  const res = await request.get(`${JIKAN_API_URL}/anime/${malId}`)
   return {
     title: res.body.title,
     episodes: res.body.episodes,

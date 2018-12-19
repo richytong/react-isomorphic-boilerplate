@@ -4,26 +4,35 @@ Whole bunch of config for an isomorphic React application
 Notes:
   - Node v10.14.1 at the time of writing
   - `make build-image` and `make push` both use `jq`, a json parser which must be installed with `brew install jq`
+  - `runserver.js` pulls env conf out of json files defined in a `.env` directory and assigns them to `process.env` much like the [`dotenv`](https://github.com/motdotla/dotenv/blob/master/lib/main.js#L89) module. `runserver.js` also runs webpack programmatically to build and watch the bundle as well as starts and watches the dev server with babel bindings. `runserver.js --mode production` seamlessly plugs into the deployment pipeline and simply starts the pre-transpiled `server.js` assuming the bundle is also compiled
 
 ## Getting started
 Clone the repo `git clone git@github.com:richytong/react-isomorphic-boilerplate`
 
 Install dependencies `npm i`
 
-Run the application `npm start`
+Run the application `node runserver.js`
 
 Navigate to `http://localhost:3000`
 
 ## Deployment
+Ensure your aws cli is configured
+```bash
+aws configure
+
+# or save a specific config profile
+aws configure --profile YOUR_PROFILE_NAME
+```
+
 Run make
 ```bash
 make
 ```
 
 <b>Makefile</b>
-`DOCKER_REGISTRY_URL` - url to your docker registry, for example 211133300000.dkr.ecr.us-east-1.amazonaws.com
-`DOCKER_IMAGE_NAME` - name of the docker image, usually the module name
-`VERSION` - pulled directly from `package.json`.version
+- `DOCKER_REGISTRY_URL` - url to your docker registry, for example 211133300000.dkr.ecr.us-east-1.amazonaws.com
+- `DOCKER_IMAGE_NAME` - name of the docker image, usually the module name
+- `VERSION` - pulled directly from `package.json`.version
 
 `make`
   - `clean` removes old build files
