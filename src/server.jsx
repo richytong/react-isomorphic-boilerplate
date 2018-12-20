@@ -67,8 +67,6 @@ app.get('/*', async (req, res) => {
         window.REDUX_DATA = ${JSON.stringify(reduxState)}
       </script>
       <script src="${bundleUrl}"></script>
-      <div id="amzn-assoc-ad-57d107c6-217c-40d8-9f12-726cf4b8ea4e"></div>
-      <script async src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&adInstanceId=57d107c6-217c-40d8-9f12-726cf4b8ea4e"></script>
     </body>
     </html>
   `)

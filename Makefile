@@ -1,6 +1,6 @@
 SHELL=/bin/bash
-DOCKER_REGISTRY_URL := 292833313474.dkr.ecr.us-east-1.amazonaws.com
-DOCKER_IMAGE_NAME := dandy-admin
+DOCKER_REGISTRY_URL := 999999999999.dkr.ecr.us-east-1.amazonaws.com
+DOCKER_IMAGE_NAME := react-isomorphic-boilerplate
 VERSION := $(shell cat package.json | jq -r '.version')
 
 build-and-push: clean build-source build-bundle build-image push
